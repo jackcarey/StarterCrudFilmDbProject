@@ -10,8 +10,10 @@ namespace CRUDFilmDbProject.Models
         [Key]
         public int FilmID { get; set; }
 
+        [Required(ErrorMessage = "Don't make us guess. What film are we talking about?")]
         public string FilmTitle { get; set; }
 
+        [Required]
         public string FilmCertificate { get; set; }
 
         public string FilmDescription { get; set; }

@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Views\CMS\" />
     <Folder Include="Views\Home\Shared\" />
     <Folder Include="ViewComponents\" />
     <Folder Include="Views\Home\Components\ShoppingCart\" />

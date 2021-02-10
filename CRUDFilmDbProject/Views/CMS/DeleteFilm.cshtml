@@ -1,0 +1,17 @@
+﻿@model CRUDFilmDbProject.Models.Film
+@{
+    Layout = "_CMS";
+    ViewData["Title"] = "Delete Film";
+}
+
+<form method="post">
+
+    <input type="hidden" name="FilmID" value="@Model.FilmID" />
+
+    <p>Delete film @Model.FilmTitle?</p>
+
+    <p><input type="submit" value="Delete" class="delete" /></p>
+
+    <p><a asp-controller="CMS" asp-action="Index" class="add">Keep</a><br></p>
+
+</form>

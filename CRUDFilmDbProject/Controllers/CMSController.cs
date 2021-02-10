@@ -30,5 +30,92 @@ namespace CRUDFilmDbProject.Controllers
             List<Film> model = _context.Films.ToList();
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult AddFilm()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddFilm(FilmForm model)
+        {
+            if (ModelState.IsValid)
+            {
+                Film newFilm = new Film
+                {
+                    FilmTitle = model.FilmTitle,
+                    FilmCertificate = model.FilmCertificate,
+                    FilmDescription = model.FilmDescription,
+                    FilmImage = model.FilmImage,
+                    FilmPrice = model.FilmPrice,
+                    Stars = model.Stars,
+                    ReleaseDate = DateTime.Now,
+                };
+                _context.Add(newFilm);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
+
+        }
+
+        [HttpGet]
+        public IActionResult UpdateFilm(int id)
+        {
+            Film model = _context.Films.Find(id);
+            FilmForm formModel = new FilmForm
+            {
+                FilmID = model.FilmID,
+                FilmTitle = model.FilmTitle,
+                FilmCertificate = model.FilmCertificate,
+                FilmDescription = model.FilmDescription,
+                FilmImage = model.FilmImage,
+                FilmPrice = model.FilmPrice,
+                Stars = model.Stars,
+                ReleaseDate = model.ReleaseDate,
+            };
+            ViewBag.ImageName = model.FilmImage;
+            return View(formModel);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateFilm(FilmForm model)
+        {
+            if (ModelState.IsValid)
+            {
+                Film editFilm = new Film
+                {
+                    FilmID = model.FilmID,
+                    FilmTitle = model.FilmTitle,
+                    FilmCertificate = model.FilmCertificate,
+                    FilmDescription = model.FilmDescription,
+                    FilmImage = model.FilmImage,
+                    FilmPrice = model.FilmPrice,
+                    Stars = model.Stars,
+                    ReleaseDate = model.ReleaseDate
+                };
+                _context.Films.Update(editFilm);
+
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult DeleteFilm(int Id)
+        {
+            Film model = _context.Films.Find(Id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteFilm(Film model)
+        {
+            _context.Films.Remove(model);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
